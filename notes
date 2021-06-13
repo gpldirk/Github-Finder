@@ -1,0 +1,106 @@
+class-based component 
+当子组件没有接收到父组件传递的任何props时，可以在其中定义使用defaultProps，显示default信息
+static defaultProps = {
+  title: 'Github Finder',
+  icon: 'fab fa-github',
+}
+
+当父组件传递props给子组件时，子组件可以通过PropTypes指定props的类型 (进行类型检查)
+import PropTypes from 'prop-types'
+static propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+}
+
+https://api.github.com/users
+
+React shortcut
+rce
+rcep
+rafcp
+rcreduxp
+rfreduxp
+impt
+
+React context API 使用流程
+1 在src目录下创建context folder
+2 在context folder下面创建types.js, 声明action types
+  export const ACTION='ACTION'
+
+3 在context folder下面为每个context创建folder
+4 在每个context folder下面定义一下三个文件
+  Context.js
+    import { createContext } from 'react';
+    const Context = createContext();
+    export default Context;
+
+  Reducer.js
+    import { ACTION } from '../types.js';
+    const Reducer = (state, action) => {
+      switch(action.type) {
+        case ACTION:
+          return {
+            ...state,
+          };
+
+        default:
+          return state;
+      }
+    }
+    export default Reducer;
+
+  State.js
+    import {ACTION} from '../types.js';
+    const State = (props) => {
+      const initialState = {
+        users: null,
+        loading: false,
+      }
+
+    const [state, dispatch] = useReducer(Reducer, initialState)
+
+    // 异步：search users
+    const searchUsers = async (input) => {
+      setLoading()
+      const res = await axios.get(`https://api.github.com/search/users?q=${input}`)
+      console.log(res.data.items)
+
+      dispatch({
+        type: SEARCH_USERS,
+        payload: res.data.items,
+      })
+    }
+
+    // 同步：set loading
+    const setLoading = () => {
+      dispatch({
+        type: SET_LOADING
+      });
+    }
+
+    return <Context.Provider
+      value={{   // 通过Context Provider的value props将context提供的props传递给其包裹的所有组件
+        users: state.users,
+        loading: state.loading,
+        searchUsers,
+      }}>
+
+      {props.children}
+    </Context.Provider>
+    }
+    export default State;
+
+5 在App.js中引入State
+  <State><App /></State>
+
+6 在组件中使用context API
+  import React, { useContext } from 'react'
+  import Context from '../context/Context'
+  const ctx = useContext(Context)
+  const { users, setLoading } = ctx  // object desctructure, 从context value props中获取state/function
+
+
+https://usc-github-finder.netlify.app/
+https://expressjs.com/en/starter/examples.html
+https://jwt.io/
+https://express-validator.github.io/docs/
