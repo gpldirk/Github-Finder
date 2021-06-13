@@ -17,6 +17,6 @@ npm start
 
 ![](./user.png)
 
-Link: https://usc-github-finder.netlify.app/
+Netlify Link: https://usc-github-finder.netlify.app/
 
 
