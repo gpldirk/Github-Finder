@@ -5,10 +5,18 @@ git clone https://github.com/gpldirk/Github-Finder.git
 ```
 
 ```
-npm install
+cd Github-Finder && npm install
 ```
 
 ```
 npm start
 ```
+
+Screen Shoot
+![](./search.png)
+
+![](./user.png)
+
+Link: https://usc-github-finder.netlify.app/
+
 
