@@ -12,7 +12,7 @@ cd Github-Finder && npm install
 npm start
 ```
 
-Screen Shoot
+#### Screen Shoot
 ![](./search.png)
 
 ![](./user.png)
